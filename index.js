@@ -1,4 +1,5 @@
 const { Worker } = require("worker_threads");
+const os = require('os');
 
 function chunkify(array, n) {
     let chunks = [];
@@ -36,7 +37,9 @@ function run(jobs, concurrentWorkers) {
 const jobs = Array.from({ length: 100 }, () => 1e9);
 
 
-run(jobs, 10);
+const osCore = os.cpus().length;
+
+run(jobs, osCore);
 // 1 workers took 62221.32159999758ms
 // 2 workers took 28322.9151000008ms
 // 10 workers took 12347.032899998128ms
